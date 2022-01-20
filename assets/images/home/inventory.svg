@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="inventory" transform="translate(-132 -59)">
+    <g id="Group_2010" data-name="Group 2010" transform="translate(-257.453 -195.912)">
+      <g id="Group_91" data-name="Group 91" transform="translate(397.69 256.912)">
+        <rect id="Rectangle_27" data-name="Rectangle 27" width="8.526" height="8.63" rx="2.042" transform="translate(0)" fill="#fff"/>
+        <path id="Path_54" data-name="Path 54" d="M399.284,256.912h-1.912v5.431l1.912-1.29,1.912,1.29v-5.431Z" transform="translate(-395.021 -256.912)" fill="#3d404e"/>
+        <path id="Path_55" data-name="Path 55" d="M399.364,259.781l-1.013.683v-3.552h2.026v3.552Z" transform="translate(-395.101 -256.912)" fill="#fff"/>
+      </g>
+      <g id="Group_94" data-name="Group 94" transform="translate(391.453 267.969)">
+        <g id="Group_92" data-name="Group 92" transform="translate(0 0)">
+          <rect id="Rectangle_28" data-name="Rectangle 28" width="8.526" height="8.63" rx="2.042" fill="#fff"/>
+          <path id="Path_56" data-name="Path 56" d="M393.924,267.519h-1.912v5.431l1.912-1.29,1.912,1.29v-5.431Z" transform="translate(-389.661 -267.519)" fill="#3d404e"/>
+          <path id="Path_57" data-name="Path 57" d="M394,270.388l-1.013.683v-3.552h2.026v3.552Z" transform="translate(-389.74 -267.519)" fill="#fff"/>
+        </g>
+        <g id="Group_93" data-name="Group 93" transform="translate(12.474 0)">
+          <rect id="Rectangle_29" data-name="Rectangle 29" width="8.526" height="8.63" rx="2.042" fill="#fff"/>
+          <path id="Path_58" data-name="Path 58" d="M404.645,267.519h-1.912v5.431l1.912-1.29,1.912,1.29v-5.431Z" transform="translate(-400.382 -267.519)" fill="#3d404e"/>
+          <path id="Path_59" data-name="Path 59" d="M404.724,270.388l-1.013.683v-3.552h2.026v3.552Z" transform="translate(-400.461 -267.519)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <rect id="base" width="24" height="24" transform="translate(132 59)" fill="none"/>
+  </g>
+</svg>
