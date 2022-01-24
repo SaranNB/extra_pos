@@ -3,12 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:extra_pos/core/app_assets/app_assets.dart';
 
 class NavItem extends StatelessWidget {
-  final String? iconPath;
+  final String iconPath;
   final Function()? onTap;
   final String? title;
 
   const NavItem(
-      {Key? key, @required this.iconPath, this.onTap, @required this.title})
+      {Key? key, required this.iconPath, this.onTap, required this.title})
       : super(key: key);
 
   @override

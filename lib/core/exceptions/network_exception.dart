@@ -89,23 +89,23 @@ abstract class NetworkException implements Exception {
         NetworkException networkExceptions = NetworkException.defaultError('Unknown error, please contact administrator');
         if (error is DioError) {
           switch (error.type) {
-            case DioErrorType.CANCEL:
+            case DioErrorType.cancel:
               networkExceptions = NetworkException.requestCancelled();
               break;
-            case DioErrorType.CONNECT_TIMEOUT:
+            case DioErrorType.connectTimeout:
               networkExceptions = NetworkException.requestTimeout();
               break;
-            case DioErrorType.DEFAULT:
+            case DioErrorType.other:
               networkExceptions = NetworkException.noInternetConnection();
               break;
-            case DioErrorType.RECEIVE_TIMEOUT:
+            case DioErrorType.receiveTimeout:
               networkExceptions = NetworkException.sendTimeout();
               break;
-            case DioErrorType.RESPONSE:
+            case DioErrorType.response:
               networkExceptions =
-                  NetworkException.handleResponse(error.response.statusCode);
+                  NetworkException.handleResponse(error.response!.statusCode!);
               break;
-            case DioErrorType.SEND_TIMEOUT:
+            case DioErrorType.sendTimeout:
               networkExceptions = NetworkException.sendTimeout();
               break;
           }

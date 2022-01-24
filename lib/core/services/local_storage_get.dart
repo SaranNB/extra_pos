@@ -10,10 +10,10 @@ abstract class LocalStorage {
 }
 
 class LocalStorageImpl implements LocalStorage {
-  GetStorage storage;
+  late GetStorage storage;
 
   LocalStorageImpl() {
-     _init();
+    storage = GetStorage();
   }
 
   _init() {

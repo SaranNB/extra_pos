@@ -16,7 +16,7 @@ class ItemsResponse {
 
   ItemsResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Item>();
+      data = [];
       json['data'].forEach((v) {
         data!.add(new Item.fromJson(v));
       });

@@ -4,14 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MenuIcon extends StatelessWidget {
-  final String? imagePath;
+  final String imagePath;
   final String? subTitle;
   final Color? iconColor;
   final Function()? onPressed;
 
   const MenuIcon({
     Key? key,
-    @required this.imagePath,
+    required this.imagePath,
     @required this.subTitle,
     this.iconColor,
     this.onPressed,

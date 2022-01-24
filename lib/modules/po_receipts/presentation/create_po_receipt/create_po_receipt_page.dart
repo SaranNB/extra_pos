@@ -92,7 +92,7 @@ class CreatePOReceiptPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Checkbox(
-                    value: controller.isAllowBackOrderSelected.value ?? false,
+                    value: controller.isAllowBackOrderSelected.value,
                     onChanged: (bool? value) {
                       controller.isAllowBackOrderSelected.value = value!;
                     },

@@ -99,7 +99,7 @@ class CrudRequisitionLinePage extends StatelessWidget {
                             isMultiline: true,
                             title: TT.readonly_text_uom_title.tr,
                             content:
-                                controller.selectedItem?.value?.itemSaleUom ??
+                                controller.selectedItem.value.itemSaleUom ??
                                     '');
                       }),
                     ),
@@ -110,8 +110,7 @@ class CrudRequisitionLinePage extends StatelessWidget {
                       isMultiline: true,
                       title: TT.readonly_text_item_description_title.tr,
                       content:
-                          controller.selectedItem?.value?.itemDescription ??
-                              '');
+                          controller.selectedItem.value.itemDescription);
                 }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -123,7 +122,7 @@ class CrudRequisitionLinePage extends StatelessWidget {
                             isMultiline: true,
                             title: TT.readonly_text_avg_sales_per_week_title.tr,
                             content: controller
-                                    .selectedItem?.value?.stockOnHand
+                                    .selectedItem.value.stockOnHand
                                     ?.toString() ??
                                 '');
                       }),
@@ -135,7 +134,7 @@ class CrudRequisitionLinePage extends StatelessWidget {
                               isMultiline: true,
                               title: TT.readonly_text_stock_in_hand_title.tr,
                               content: controller
-                                      .selectedItem?.value?.stockOnHand
+                                      .selectedItem.value.stockOnHand
                                       ?.toString() ??
                                   '');
                         })),

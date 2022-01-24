@@ -89,14 +89,13 @@ class _ListRequisitionPageState extends State<ListRequisitionPage> {
               }),
           Obx(() {
             var statusList =
-                controller.requisitionStatusListState?.response?.value?.data ??
-                    null;
+                controller.requisitionStatusListState.response.value.data;
             return AppDropdownInputField(
                 onChanged: (value) {
                   controller.selectedRequisitionStatus.value = value;
                 },
                 title: 'Status',
-                value: controller.selectedRequisitionStatus?.value,
+                value: controller.selectedRequisitionStatus.value,
                 list: statusList != null
                     ? statusList
                         .map((e) =>
@@ -112,7 +111,7 @@ class _ListRequisitionPageState extends State<ListRequisitionPage> {
   _buildListHeader() {
     return Obx(() {
       return ListHeader(
-        totalRecords: controller.state?.totalRecords?.toString() ?? '',
+        totalRecords: controller.state.totalRecords.toString(),
       );
     });
   }
@@ -131,7 +130,7 @@ class _ListRequisitionPageState extends State<ListRequisitionPage> {
           },
           status: controller.state.status.value,
           errorMessage: controller.state.errorMessage.value ?? '',
-          listItemCount: controller.state.response.length ?? 0,
+          listItemCount: controller.state.response.length,
           currentPage: controller.state.currentPage.value,
           totalRecordsCount: controller.state.totalRecords.value,
           itemBuilder: (BuildContext context, int index) {

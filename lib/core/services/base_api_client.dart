@@ -14,11 +14,15 @@ import 'package:meta/meta.dart';
 
 abstract class BaseApiClient {
   Future<dynamic> get(String url,
-      {Map<String, dynamic> headers, Map<String, dynamic> queryParameters, bool removeNulls});
+      {Map<String, dynamic> headers,
+      Map<String, dynamic> queryParameters,
+      bool removeNulls});
 
-  Future<dynamic> post(String url, {Map headers, @required body});
+  Future<dynamic> post(String url,
+      {Map<String, dynamic> headers, @required body});
 
-  Future<dynamic> put(String url, {Map headers, @required body});
+  Future<dynamic> put(String url,
+      {Map<String, dynamic> headers, @required body});
 }
 
 class BaseApiClientImpl implements BaseApiClient {
@@ -34,86 +38,84 @@ class BaseApiClientImpl implements BaseApiClient {
     setBaseUrl();
     _dio.options.connectTimeout = 15000;
     _dio.options.receiveTimeout = 15000;
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (RequestOptions options) async {
-          if (!options.headers.containsKey("Authorization") &&
-              AuthStore.to.accessToken != null) {
-            options.headers["Authorization"] =
-                "Bearer ${AuthStore.to.accessToken}";
-          }
-          return options;
-        },
-        onResponse: (Response response) async {
-          return response;
-        },
-        onError: (DioError e) async {
-
-          var networkException = NetworkException.getDioException(e);
-          if (networkException is RequestTimeoutException ||
-              networkException is NoInternetConnectionException ||
-              networkException is DefaultErrorException) {
-
-            if(retriedByUser) {
-              Getx.Get.back();
-            }
-            var selection = await showDialog<bool>(
-                context: Getx.Get.context!,
-                builder: (BuildContext context) {
-                  return ActionAlertDialog(
-                    title: 'Alert',
-                    message: 'Unable to connect to Network',
-                    negativeActionText: 'Reset App',
-                    positiveActionText: 'Retry',
-                    onNegativeActionTapped: () {
-                      print('Negative Action');
-                      Getx.Get.back(result: false);
-                    },
-                    onPositiveActionTapped: () {
-                      print('Positive Action');
-                      Getx.Get.back(result: true);
-                    },
-                  );
-                },
-                barrierDismissible: false);
-
-            if(selection!) {
-              CircularProgressLoaderDialog.showLoader(
-                  Getx.Get.context!, 'Retrying, please wait...');
-              return _retry(e.request, true);
-            } else {
-              AppConfigStore.to.saveAppUrl(null);
-              AuthStore.to.logoutAndGotoConfig();
-              return e;
-            }
-
-            // Get.to(DialogTestPage());
-          }
-
-          if (e.response == null) return e;
-
-          if (e.response.statusCode != 401) return e;
-
-          if (e.response.statusCode == 401 &&
-              e.request.path == 'authenticate') {
-            return e;
-          }
-
-          var isAccessTokenExpired = AuthStore.to.isAccessTokenExpired();
-          var isRefreshTokenExpired = AuthStore.to.isRefreshTokenExpired();
-
-          if (e.response.statusCode == 401 && isRefreshTokenExpired) {
-            AuthStore.to.logout();
-            return e;
-          } else if (e.response.statusCode == 401 && isAccessTokenExpired) {
-            await renewAccessToken();
-            return _retry(e.request, false);
-          }
-
-          return e;
-        },
-      ),
-    );
+    // _dio.interceptors.add(
+    //   InterceptorsWrapper(
+    //     onRequest: (RequestOptions options) async {
+    //       if (!options.headers.containsKey("Authorization") &&
+    //           AuthStore.to.accessToken != null) {
+    //         options.headers["Authorization"] =
+    //             "Bearer ${AuthStore.to.accessToken}";
+    //       }
+    //       return options;
+    //     },
+    //     onResponse: (Response response) async {
+    //       return response;
+    //     },
+    //     onError: (DioError e) async {
+    //       var networkException = NetworkException.getDioException(e);
+    //       if (networkException is RequestTimeoutException ||
+    //           networkException is NoInternetConnectionException ||
+    //           networkException is DefaultErrorException) {
+    //         if (retriedByUser) {
+    //           Getx.Get.back();
+    //         }
+    //         var selection = await showDialog<bool>(
+    //             context: Getx.Get.context!,
+    //             builder: (BuildContext context) {
+    //               return ActionAlertDialog(
+    //                 title: 'Alert',
+    //                 message: 'Unable to connect to Network',
+    //                 negativeActionText: 'Reset App',
+    //                 positiveActionText: 'Retry',
+    //                 onNegativeActionTapped: () {
+    //                   print('Negative Action');
+    //                   Getx.Get.back(result: false);
+    //                 },
+    //                 onPositiveActionTapped: () {
+    //                   print('Positive Action');
+    //                   Getx.Get.back(result: true);
+    //                 },
+    //               );
+    //             },
+    //             barrierDismissible: false);
+    //
+    //         if (selection!) {
+    //           CircularProgressLoaderDialog.showLoader(
+    //               Getx.Get.context!, 'Retrying, please wait...');
+    //           return _retry(e.request, true);
+    //         } else {
+    //           AppConfigStore.to.saveAppUrl(null);
+    //           AuthStore.to.logoutAndGotoConfig();
+    //           return e;
+    //         }
+    //
+    //         // Get.to(DialogTestPage());
+    //       }
+    //
+    //       if (e.response == null) return e;
+    //
+    //       if (e.response.statusCode != 401) return e;
+    //
+    //       if (e.response.statusCode == 401 &&
+    //           e.request.path == 'authenticate') {
+    //         return e;
+    //       }
+    //
+    //       var isAccessTokenExpired = AuthStore.to.isAccessTokenExpired();
+    //       var isRefreshTokenExpired = AuthStore.to.isRefreshTokenExpired();
+    //
+    //       if (e.response.statusCode == 401 && isRefreshTokenExpired) {
+    //         AuthStore.to.logout();
+    //         return e;
+    //       } else if (e.response.statusCode == 401 && isAccessTokenExpired) {
+    //         await renewAccessToken();
+    //         return _retry(e.request, false);
+    //       }
+    //
+    //       return e;
+    //     },
+    //   ),
+    // );
   }
 
   Future<void> renewAccessToken() async {
@@ -139,7 +141,8 @@ class BaseApiClientImpl implements BaseApiClient {
     }
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions, bool retriedByUser) async {
+  Future<Response<dynamic>> _retry(
+      RequestOptions requestOptions, bool retriedByUser) async {
     this.retriedByUser = retriedByUser;
     setBaseUrl();
     requestOptions.headers["Authorization"] =
@@ -161,8 +164,9 @@ class BaseApiClientImpl implements BaseApiClient {
       bool removeNulls: false}) async {
     try {
       setBaseUrl();
-      if(removeNulls)
-        queryParameters.removeWhere((key, value) => key == null || value == null);
+      if (removeNulls)
+        queryParameters!
+            .removeWhere((key, value) => key == null || value == null);
       final response = await _dio.get(
         url,
         queryParameters: queryParameters,
@@ -170,14 +174,14 @@ class BaseApiClientImpl implements BaseApiClient {
       );
       return response.data;
     } catch (e) {
-      await handleError(e);
+      await handleError(e as DioError);
     }
   }
 
   @override
   Future<dynamic> post(
     String url, {
-    Map headers,
+    Map<String, dynamic>? headers,
     @required body,
     bool authorization = false,
   }) async {
@@ -187,14 +191,14 @@ class BaseApiClientImpl implements BaseApiClient {
           await _dio.post(url, data: body, options: Options(headers: headers));
       return response.data;
     } catch (e) {
-      await handleError(e);
+      await handleError(e as DioError);
     }
   }
 
   @override
   Future put(
     String url, {
-    Map headers,
+    Map<String, dynamic>? headers,
     @required body,
   }) async {
     try {
@@ -204,7 +208,7 @@ class BaseApiClientImpl implements BaseApiClient {
 
       return response.data;
     } catch (e) {
-      await handleError(e);
+      await handleError(e as DioError);
     }
   }
 
@@ -229,23 +233,22 @@ class BaseApiClientImpl implements BaseApiClient {
   }
 
   Future handleError(DioError e) async {
-
-    if (e?.response?.data['error'] == true ||
-        e?.response?.data['error'] == 'true') {
-      if (e?.response?.data['message'] != null) {
+    if (e.response?.data['error'] == true ||
+        e.response?.data['error'] == 'true') {
+      if (e.response?.data['message'] != null) {
         throw NetworkException.customServerException(
-            e.response.data['message']);
+            e.response?.data['message']);
       }
-      if (e?.response?.data['errorMesage'] != null) {
-        var errorResponse = ErrorResponse.fromJson(e?.response?.data);
-        var otherMessages =
-            errorResponse.errorDetails.map((e) => e.errorDescription).toList();
+      if (e.response?.data['errorMesage'] != null) {
+        var errorResponse = ErrorResponse.fromJson(e.response?.data);
+        List<String?>? otherMessages =
+            errorResponse.errorDetails?.map((e) => e.errorDescription).toList();
         await showMessageDialog(
             type: MessageDialogType.ERROR,
             mainMessage: errorResponse.errorMesage,
             otherMessages: otherMessages,
             closeAfterDelay: false);
-        throw NetworkException.customServerException(errorResponse.errorMesage);
+        throw NetworkException.customServerException(errorResponse.errorMesage ?? '');
       }
     }
 

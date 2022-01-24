@@ -16,7 +16,7 @@ class UomResponse{
 
   UomResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<Uom>();
+      data = [];
       json['data'].forEach((v) {
         data!.add(new Uom.fromJson(v));
       });

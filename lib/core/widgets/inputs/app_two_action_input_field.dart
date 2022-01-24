@@ -71,7 +71,7 @@ class AppTwoActionInputField extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            child: Text((value == null || value == '') ? hint : value,
+            child: Text(value ?? hint ?? '',
                 style: (value == null || value == '')
                     ? TextStyle(color: Colors.grey[400], fontSize: 16.0)
                     : TextStyle(color: Colors.black, fontSize: 16.0))),

@@ -61,9 +61,9 @@ class ListRequisitionController extends GetxController {
   onSearchTap({int? start, int? limit}) {
     branchCodeFilter = selectedBranch.branchCode ?? '';
     branchIdFilter = selectedBranch.branchId?.toString() ?? '';
-    trnFilter = trnTextController.text ?? '';
+    trnFilter = trnTextController.text ;
     userNameFilter = selectedUser.userName ?? '';
-    requisitionStatusFilter = selectedRequisitionStatus.value ?? '';
+    requisitionStatusFilter = selectedRequisitionStatus.value;
 
     getRequisitions(start: start!, limit: limit!, reset: true);
   }

@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
 
-
 class AppExpandableCard extends StatefulWidget {
   AppExpandableCard({
     Key? key,
@@ -77,17 +76,17 @@ class _ExpansionTileState extends State<AppExpandableCard>
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(duration: _kExpand, vsync: this);
     _heightFactor = _controller!.drive(_easeInTween);
     _iconTurns = _controller!.drive(_halfTween.chain(_easeInTween));
-    _borderColor = _controller!.drive(_borderColorTween.chain(_easeOutTween));
-    _headerColor = _controller!.drive(_headerColorTween.chain(_easeInTween));
-    _iconColor = _controller!.drive(_iconColorTween.chain(_easeInTween));
-    _backgroundColor =
-        _controller!.drive(_backgroundColorTween.chain(_easeOutTween));
+    // _borderColor = _controller!.drive(_borderColorTween.chain(_easeOutTween));
+    // _headerColor = _controller!.drive(_headerColorTween.chain(_easeInTween));
+    // _iconColor = _controller!.drive(_iconColorTween.chain(_easeInTween));
+    // _backgroundColor =
+    //     _controller!.drive(_backgroundColorTween.chain(_easeOutTween));
 
-    _isExpanded = (PageStorage.of(context)?.readState(context) as bool ??
-        widget.initiallyExpanded)!;
+    _isExpanded = (PageStorage.of(context)?.readState(context) as bool);
     if (_isExpanded) _controller!.value = 1.0;
   }
 
@@ -136,7 +135,7 @@ class _ExpansionTileState extends State<AppExpandableCard>
   }
 
   void _handleTap() {
-    if(_isExpanded)
+    if (_isExpanded)
       collapse();
     else
       expand();
@@ -144,9 +143,7 @@ class _ExpansionTileState extends State<AppExpandableCard>
 
   Widget _buildChildren(BuildContext context, Widget? child) {
     return Container(
-      decoration: BoxDecoration(
-        color: _backgroundColor!.value ?? Colors.transparent
-      ),
+      decoration: BoxDecoration(color: _backgroundColor!.value),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
@@ -160,11 +157,10 @@ class _ExpansionTileState extends State<AppExpandableCard>
                 leading: widget.leading,
                 title: widget.title,
                 subtitle: widget.subtitle,
-                trailing:
-                    RotationTransition(
-                      turns: _iconTurns!,
-                      child: const Icon(Icons.expand_more),
-                    ),
+                trailing: RotationTransition(
+                  turns: _iconTurns!,
+                  child: const Icon(Icons.expand_more),
+                ),
               ),
             ),
           ),
@@ -216,13 +212,12 @@ class _ExpansionTileState extends State<AppExpandableCard>
         offstage: closed);
 
     Debouncer(milliseconds: 0).run(() {
-
-      if(widget.actionType == ExpandableCardAction.COLLAPSE) {
+      if (widget.actionType == ExpandableCardAction.COLLAPSE) {
         collapse();
         previousAction = ExpandableCardAction.COLLAPSE;
         widget.actionType = null;
       }
-      if(widget.actionType == ExpandableCardAction.EXPAND) {
+      if (widget.actionType == ExpandableCardAction.EXPAND) {
         expand();
         previousAction = ExpandableCardAction.EXPAND;
         widget.actionType = null;
@@ -237,6 +232,4 @@ class _ExpansionTileState extends State<AppExpandableCard>
   }
 }
 
-enum ExpandableCardAction {
-  NO_ACTION, EXPAND, COLLAPSE
-}
+enum ExpandableCardAction { NO_ACTION, EXPAND, COLLAPSE }

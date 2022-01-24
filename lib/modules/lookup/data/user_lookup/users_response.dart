@@ -16,7 +16,7 @@ class UsersResponse {
 
   UsersResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<User>();
+      data = [];
       json['data'].forEach((v) {
         data!.add(new User.fromJson(v));
       });

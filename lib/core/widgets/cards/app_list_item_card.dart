@@ -94,7 +94,7 @@ class ListItemCard extends StatelessWidget {
     );
   }
 
-  _buildReadonlyText(String title, String value) {
+  _buildReadonlyText(String? title, String? value) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       child: Row(

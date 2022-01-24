@@ -69,7 +69,7 @@ class CreateRequisitionPage extends StatelessWidget {
                         isMultiline: true,
                         title: 'Branch',
                         content: controller.branchInfoController.branchInfoState
-                                ?.response?.value?.data?.first?.branchCode ??
+                                .response.value.data?.first.branchCode ??
                             '',
                       )),
                   Expanded(
@@ -78,8 +78,7 @@ class CreateRequisitionPage extends StatelessWidget {
                         isMultiline: true,
                         title: 'User',
                         content: controller.userInfoController.userInfoState
-                                ?.response?.value?.firstName ??
-                            '',
+                                .response.value.firstName,
                       ))
                 ],
               )

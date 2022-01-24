@@ -7,7 +7,7 @@ class BranchInfoResponse {
 
   BranchInfoResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<BranchInfo>();
+      data = [];
       json['data'].forEach((v) {
         data!.add(new BranchInfo.fromJson(v));
       });

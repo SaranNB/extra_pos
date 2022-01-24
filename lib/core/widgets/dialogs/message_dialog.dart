@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class MessageDialog extends StatelessWidget {
   MessageDialogType? messageType;
   final String? mainMessage;
-  final List<String>? otherMessages;
+  final List<String?>? otherMessages;
   int displayTime;
   bool isOkPressed = false;
   bool closeAfterDelay;
@@ -68,7 +68,7 @@ class MessageDialog extends StatelessWidget {
                         children: [
                           Text((index + 1).toString() + '.', style: TextStyle(color: Colors.blueGrey),),
                           SizedBox(width: 4),
-                          Expanded(child: Text(otherMessages![index], style: TextStyle(color: Colors.blueGrey))),
+                          Expanded(child: Text(otherMessages![index]!, style: TextStyle(color: Colors.blueGrey))),
                         ],
                       );
                     }),
@@ -113,7 +113,7 @@ enum MessageDialogType { INFO, SUCCESS, ERROR, WARNING }
 Future showMessageDialog(
     {MessageDialogType? type,
     @required String? mainMessage,
-    List<String> otherMessages: const [],
+    List<String?>? otherMessages: const [],
     int? displayTime,
     bool closeAfterDelay: true,
     bool barrierDismissible: true}) async {

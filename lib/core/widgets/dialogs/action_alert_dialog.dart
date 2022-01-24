@@ -107,4 +107,6 @@ Future<bool> showAlertDialog(
         );
       },
       barrierDismissible: barrierDismissible);
+
+  return false;
 }

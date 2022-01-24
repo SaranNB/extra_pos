@@ -31,7 +31,7 @@ class BarCodeBasedItemLookupPage extends StatelessWidget {
   _buildListHeader() {
     return Obx(() {
       return ListHeader(
-        totalRecords: controller.barcodeBasedItemsState.totalRecords.toString() ?? '',
+        totalRecords: controller.barcodeBasedItemsState.totalRecords.toString(),
       );
     });
   }
@@ -56,7 +56,7 @@ class BarCodeBasedItemLookupPage extends StatelessWidget {
           },
           status: controller.barcodeBasedItemsState.status.value,
           errorMessage: controller.barcodeBasedItemsState.errorMessage.value ?? '',
-          listItemCount: controller.barcodeBasedItemsState.response.length ?? 0,
+          listItemCount: controller.barcodeBasedItemsState.response.length,
           currentPage: controller.barcodeBasedItemsState.currentPage.value,
           totalRecordsCount: controller.barcodeBasedItemsState.totalRecords.value,
           itemBuilder: (BuildContext context, int index) {

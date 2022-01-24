@@ -16,7 +16,7 @@ class RequisitionLineListResponse {
 
   RequisitionLineListResponse.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = new List<RequisitionLine>();
+      data = [];
       json['data'].forEach((v) {
         data!.add(new RequisitionLine.fromJson(v));
       });

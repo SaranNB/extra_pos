@@ -234,8 +234,7 @@ class CrudPOReceiptLinePage extends StatelessWidget {
                   isMultiline: true,
                   title: 'Unit Price',
                   content: controller.selectedPOLineNumber.value!.unitCostVip
-                          .toString() ??
-                      '',
+                          .toString(),
                 ))
           ],
         ),

@@ -44,7 +44,7 @@ class POLineNumberLookupPage extends StatelessWidget {
   _buildListHeader() {
     return Obx(() {
       return ListHeader(
-        totalRecords: controller.state.totalRecords.toString() ?? '',
+        totalRecords: controller.state.totalRecords.toString(),
       );
     });
   }
@@ -63,7 +63,7 @@ class POLineNumberLookupPage extends StatelessWidget {
           },
           status: controller.state.status.value,
           errorMessage: controller.state.errorMessage.value ?? '',
-          listItemCount: controller.state.response.length ?? 0,
+          listItemCount: controller.state.response.length,
           currentPage: controller.state.currentPage.value,
           totalRecordsCount: controller.state.totalRecords.value,
           itemBuilder: (BuildContext context, int index) {
